@@ -1,0 +1,45 @@
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-white/30 border-b border-white/40 shadow-sm">
+
+    <div class="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">
+
+      <!-- LEFT: LOGO -->
+      <div class="flex items-center space-x-2">
+        <div class="w-9 h-9 bg-blue-600 text-white flex items-center justify-center rounded-lg font-bold">
+          D
+        </div>
+        <span class="font-bold text-gray-800">Data Flow</span>
+      </div>
+
+      <!-- CENTER: NAV -->
+      <nav class="flex space-x-10 text-gray-700 font-medium">
+        <a routerLink="/home" routerLinkActive="text-blue-600 border-b-2 border-blue-600 pb-1"
+          class="hover:text-blue-600 transition">
+          Home
+        </a>
+
+        <a routerLink="/users" routerLinkActive="text-blue-600 border-b-2 border-blue-600 pb-1"
+          class="hover:text-blue-600 transition">
+          Users
+        </a>
+
+        <a routerLink="/posts" routerLinkActive="text-blue-600 border-b-2 border-blue-600 pb-1"
+          class="hover:text-blue-600 transition">
+          Posts
+        </a>
+
+        <a routerLink="/comments" routerLinkActive="text-blue-600 border-b-2 border-blue-600 pb-1"
+          class="hover:text-blue-600 transition">
+          Comments
+        </a>
+      </nav>
+
+    
+
+    </div>
+
+  </header>
+
+  <!-- PAGE CONTENT -->
+  <main class="p-6 bg-gray-50 min-h-screen">
+    <router-outlet></router-outlet>
+  </main>

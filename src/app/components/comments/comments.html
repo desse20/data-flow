@@ -1,0 +1,37 @@
+<body class="bg-gray-100 min-h-screen p-6">
+  <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">Comments List</h1>
+
+  <!-- Container -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    @if (commentsList.length == 0) {
+      <p class="text-center text-gray-500 col-span-full">No comments found.</p>
+    } @else {
+      @for (comment of commentsList; track comment.id) {
+        <!-- CARD -->
+        <div class="bg-white rounded-2xl shadow-md p-6 hover:shadow-xl transition duration-300">
+          <!-- Header -->
+          <div class="mb-4">
+            <h2 class="text-lg font-semibold text-gray-800">
+              {{ comment.name }}
+            </h2>
+            <p class="text-sm text-gray-500">
+              {{ comment.email }}
+            </p>
+          </div>
+
+          <!-- Body -->
+          <p class="text-gray-600 text-sm leading-relaxed mb-4">
+            {{ comment.body }}
+          </p>
+
+          <!-- Footer -->
+          <div class="flex justify-between items-center text-xs text-gray-400">
+            <span>#ID: {{ comment.id }}</span>
+            <span>Post: {{ comment.postId }}</span>
+          </div>
+        </div>
+      }
+      <!-- Duplique cette card dynamiquement -->
+    }
+  </div>
+</body>
