@@ -12,20 +12,23 @@ export class Comments  implements OnInit {
     commentsList : CommentInterface [] =[];
     CommentService = inject(CommentService);
     private cdr = inject(ChangeDetectorRef);
+    loadingComments: boolean = false;
     ngOnInit(): void {
       this.getComments();
   }
 
   getComments() {
+    this.loadingComments = true;
     this.CommentService.getComments().subscribe({
-
       next: (result : any) => {
-        //debugger;
         this.commentsList = result;
+        this.loadingComments = false;
         this.cdr.detectChanges();
       },
         error: (err) => {
           console.log(err);
+          this.loadingComments = false;
+          this.cdr.detectChanges();
         },
     });
   }

@@ -17,39 +17,64 @@ export class PostsList  implements OnInit {
   private cdr = inject(ChangeDetectorRef);
   commentsMap: { [postId: number]: CommentInterface[] } = {};
   expandedPosts: { [postId: number]: boolean } = {};
+  loadingComments: { [postId: number]: boolean } = {};
+  loadingPosts: boolean = false;
   ngOnInit(): void {
     this.getPosts();
   }
   getPosts() {
+    this.loadingPosts = true;
     this.PostService.getPosts().subscribe({
-
       next: (result : any) => {
-        //debugger;
         this.postsList = result;
+        this.loadingPosts = false;
         this.cdr.detectChanges();
       },
-        error: (err) => {
-          console.log(err);
-        },
+      error: (err) => {
+        console.log(err);
+        this.loadingPosts = false;
+        this.cdr.detectChanges();
+      },
     });
   }
 
   toggleComments(postId: number) {
-    this.expandedPosts[postId] = !this.expandedPosts[postId];
+    // Create a new object to trigger change detection
+    this.expandedPosts = {
+      ...this.expandedPosts,
+      [postId]: !this.expandedPosts[postId]
+    };
 
+    // Load comments only if expanding and not already loaded
     if (this.expandedPosts[postId] && !this.commentsMap[postId]) {
+      this.loadingComments = {
+        ...this.loadingComments,
+        [postId]: true
+      };
       this.getCommentsByPostId(postId);
     }
+
+    // Force change detection
+    this.cdr.detectChanges();
   }
 
   getCommentsByPostId(postId: number) {
     this.CommentService.getCommentsByPostId(postId).subscribe({
       next: (comments: any) => {
         this.commentsMap[postId] = comments;
+        this.loadingComments = {
+          ...this.loadingComments,
+          [postId]: false
+        };
         this.cdr.detectChanges();
       },
       error: (err) => {
         console.log(err);
+        this.loadingComments = {
+          ...this.loadingComments,
+          [postId]: false
+        };
+        this.cdr.detectChanges();
       }
     });
   }

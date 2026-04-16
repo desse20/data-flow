@@ -12,19 +12,23 @@ export class UsersList  implements OnInit {
   usersList: UserInterface[] = [];
   UserService = inject(UserService);
   private cdr = inject(ChangeDetectorRef);
+  loadingUsers: boolean = false;
   ngOnInit(): void {
     this.getUsers();
   }
   getUsers() {
+    this.loadingUsers = true;
     this.UserService.getUsers().subscribe(
       {
         next: (result: any) => {
-          //debugger;
           this.usersList = result;
+          this.loadingUsers = false;
           this.cdr.detectChanges();
         },
         error: (err) => {
           console.log(err);
+          this.loadingUsers = false;
+          this.cdr.detectChanges();
         },
       }
     )

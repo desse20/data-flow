@@ -3,7 +3,11 @@
 
   <!-- Container -->
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    @if (commentsList.length == 0) {
+    @if (loadingComments) {
+      <div class="flex justify-center items-center py-12 col-span-full">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+      </div>
+    } @else if (commentsList.length == 0) {
       <p class="text-center text-gray-500 col-span-full">No comments found.</p>
     } @else {
       @for (comment of commentsList; track comment.id) {
