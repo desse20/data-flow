@@ -6,6 +6,10 @@ Ce projet a été généré avec [Angular CLI](https://github.com/angular/angula
 
 DataFlow est une application Angular qui démontre les patterns de récupération et d'affichage de données en utilisant l'API JSONPlaceholder. L'application présente des posts, des utilisateurs et des commentaires avec des fonctionnalités interactives.
 
+## Démonstration
+
+[![Voir la démo](https://img.shields.io/badge/Demo-Live-brightgreen.svg)](https://data-flow-xi.vercel.app/)
+
 ## Démarrage Rapide
 
 ```bash
